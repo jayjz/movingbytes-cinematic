@@ -1,0 +1,26 @@
+{
+  "note": "API spec not accessible - manual testing required",
+  "common_endpoints_to_test": [
+    "/v1/wallets",
+    "/v1/wallets/{id}",
+    "/v1/transfers",
+    "/v1/transfers/{id}",
+    "/v1/businesses",
+    "/v1/businesses/{id}",
+    "/v1/banks",
+    "/v1/banks/{id}",
+    "/v1/payments",
+    "/v1/payments/{id}",
+    "/v1/chargebacks",
+    "/v1/settlements"
+  ],
+  "test_cases": [
+    "IDOR: Access other user's wallets",
+    "IDOR: Access other user's transfers",
+    "BOLA: Modify other user's resources",
+    "Missing auth on sensitive endpoints",
+    "Business logic: Negative amounts",
+    "Business logic: Duplicate transfers",
+    "Rate limiting bypass"
+  ]
+}
