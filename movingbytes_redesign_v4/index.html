@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movingbytes.dev — Interface Architect</title>
+    <meta name="description" content="Georgie Rocky builds cinematic interfaces that breathe. Vanilla JS, WebGL, and systems that respect your time.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <style>
+        :root{--bg:#0a0a0a;--text:#e8e8e8;--cyan:#00d9ff;--amber:#ff9000;--red:#ff3366;--border:#1a1a1a;--muted:#888}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;cursor:none}
+        @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}body{cursor:auto}*{animation:none!important;transition:none!important}}
+    </style>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Custom cursor -->
+    <div class="cursor" aria-hidden="true">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+    <div class="cursor-trail" aria-hidden="true"></div>
+
+    <!-- Film effects -->
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    
+    <nav class="navbar" role="navigation">
+        <div class="nav-wrap">
+            <a href="#" class="nav-brand">
+                movingbytes<span class="tld">.dev</span>
+                <span class="nav-subtitle">Interface Architect</span>
+            </a>
+            <div class="nav-actions">
+                <a href="#work" class="nav-link magnetic" data-magnetic>Work</a>
+                <a href="#manifesto" class="nav-link magnetic" data-magnetic>Manifesto</a>
+                <a href="#contact" class="nav-link magnetic" data-magnetic>Contact</a>
+            </div>
+        </div>
+        <div class="nav-progress" aria-hidden="true"><div class="nav-progress-bar"></div></div>
+    </nav>
+
+    <main>
+        <!-- HERO: Dramatic + Personal -->
+        <section class="hero" aria-labelledby="hero-title">
+            <canvas id="particles" aria-hidden="true"></canvas>
+            <div class="hero-atmosphere" aria-hidden="true">
+                <div class="parallax-layer layer-1"></div>
+                <div class="parallax-layer layer-2"></div>
+                <div class="parallax-layer layer-3"></div>
+            </div>
+            
+            <div class="hero-content">
+                <div class="hero-eyebrow">
+                    <span class="eyebrow-dot"></span>
+                    <span id="status-text">Building systems that disappear</span>
+                </div>
+                
+                <h1 id="hero-title" class="hero-title">
+                    <span class="title-line">
+                        <span class="title-word" data-stagger>G</span><span class="title-word" data-stagger>e</span><span class="title-word" data-stagger>o</span><span class="title-word" data-stagger>r</span><span class="title-word" data-stagger>g</span><span class="title-word" data-stagger>i</span><span class="title-word" data-stagger>e</span>
+                        <span class="title-word accent" data-stagger> </span>
+                        <span class="title-word accent" data-stagger>R</span><span class="title-word accent" data-stagger>o</span><span class="title-word accent" data-stagger>c</span><span class="title-word accent" data-stagger>k</span><span class="title-word accent" data-stagger>y</span>
+                    </span>
+                    <span class="title-line subtitle">
+                        <span id="typewriter" aria-live="polite"></span>
+                        <span class="type-cursor" aria-hidden="true">▌</span>
+                    </span>
+                </h1>
+                
+                <p class="hero-description">
+                    I build interfaces that feel like film—intentional motion, deliberate pacing, 
+                    and obsessive attention to the 16.67ms that separate <em>good</em> from <em>unforgettable</em>.
+                    No frameworks. No bloat. Just truthful systems that respect your time and attention.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#work" class="btn-primary magnetic" data-magnetic>
+                        <span>View Work</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 8H12M12 8L9 5M12 8L9 11" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </a>
+                    <div class="hero-metrics">
+                        <div class="metric">
+                            <div class="metric-value">2,400</div>
+                            <div class="metric-label">annotations/hour sustained</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">0</div>
+                            <div class="metric-label">frameworks shipped</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">60</div>
+                            <div class="metric-label">fps or it didn't happen</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-scene-info">
+                <div class="scene-stat">
+                    <span class="scene-label">CURRENT</span>
+                    <span class="scene-value">Annotation OS v3</span>
+                </div>
+                <div class="scene-stat">
+                    <span class="scene-label">BUILDING</span>
+                    <span class="scene-value">At 2:47 AM, probably</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORK: Rich Storytelling -->
+        <section id="work" class="work">
+            <div class="container">
+                <header class="section-head">
+                    <div class="section-eyebrow">SELECTED WORK — 2023→2026</div>
+                    <h2>Systems that ship. <span class="text-muted">Stories that stick.</span></h2>
+                    <p>Six projects built because existing tools failed me. Each one a response to friction I felt in my own workflow.</p>
+                </header>
+
+                <div class="projects">
+                    <!-- Project 1: Annotation OS -->
+                    <article class="project-card" data-project="annotation" tabindex="0">
+                        <div class="project-visual">
+                            <div class="project-media-wrap">
+                                <img src="assets/annotation-os.webp" alt="Annotation OS interface showing high-volume labeling" loading="lazy">
+                                <div class="project-glow"></div>
+                            </div>
+                            <div class="project-meta-overlay">
+                                <span class="project-number">01</span>
+                                <div class="project-quick-stats">
+                                    <span>2.4k/hr</span>
+                                    <span>•</span>
+                                    <span>12 annotators</span>
+                                    <span>•</span>
+                                    <span>2M+/day</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <h3>Annotation OS</h3>
+                                <div class="project-tags">
+                                    <span>Canvas 2D</span>
+                                    <span>Web Workers</span>
+                                    <span>Go</span>
+                                    <span>Zero React</span>
+                                </div>
+                            </div>
+                            <div class="project-story">
+                                <p class="story-lead">
+                                    <strong>The problem:</strong> Existing tools choked at 500 annotations/hour. 
+                                    I needed 2,400. Every frame mattered when you're labeling training data for 8 hours straight.
+                                </p>
+                                <p>
+                                    <strong>My approach:</strong> Threw out React on day 3. Canvas-based renderer, 
+                                    manual DOM patching, Web Workers for everything that wasn't render-critical. 
+                                    Treat the DOM like it's expensive—because it is. Memory pooling, object reuse, 
+                                    the kind of obsessive optimization that makes other devs uncomfortable.
+                                </p>
+                                <p>
+                                    <strong>Built at 2 AM</strong> during a deadline crunch. Third iteration. 
+                                    First two used virtual scrolling libraries that fought me. Third one I wrote 
+                                    the scroller in 200 lines and it was 4x faster. Lesson: when performance matters, 
+                                    abstraction is the enemy.
+                                </p>
+                                <p class="story-outcome">
+                                    <strong>Now:</strong> Processes 2M+ annotations daily across 12 annotators. 
+                                    Peak: 2,847 annotations in a single hour. Zero dropped frames on a 2019 MacBook Air. 
+                                    The secret isn't magic—it's saying no to everything that isn't essential.
+                                </p>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-year">2025 — Production</span>
+                                <span class="project-links">
+                                    <a href="#" class="link-ghost">Case Study →</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Heavens Gallery -->
+                    <article class="project-card" data-project="heavens" tabindex="0">
+                        <div class="project-visual">
+                            <div class="project-media-wrap">
+                                <img src="assets/heavens-gallery.webp" alt="Heavens Gallery WebGL experience" loading="lazy">
+                                <div class="project-glow amber"></div>
+                            </div>
+                            <div class="project-meta-overlay">
+                                <span class="project-number">02</span>
+                                <div class="project-quick-stats">
+                                    <span>14KB</span>
+                                    <span>•</span>
+                                    <span>WebGL2</span>
+                                    <span>•</span>
+                                    <span>60fps mobile</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <h3>Heavens Gallery</h3>
+                                <div class="project-tags">
+                                    <span>WebGL</span>
+                                    <span>GLSL</span>
+                                    <span>Procedural</span>
+                                    <span>14KB</span>
+                                </div>
+                            </div>
+                            <div class="project-story">
+                                <p class="story-lead">
+                                    <strong>The problem:</strong> Portfolio sites look the same. Template grids, 
+                                    fade-ins, the same three.js boilerplate. I wanted something that felt like 
+                                    flipping through a contact sheet in a darkroom.
+                                </p>
+                                <p>
+                                    <strong>My approach:</strong> No external libraries. Custom WebGL2 renderer 
+                                    in 14KB gzipped. Procedural film grain, chromatic aberration, scanline simulation—
+                                    all in shaders. The images aren't loaded; they're streamed as compressed textures 
+                                    and decompressed in the GPU. Built the texture atlas packer myself because 
+                                    existing tools were too slow.
+                                </p>
+                                <p>
+                                    <strong>Process:</strong> Started with a film emulation shader I wrote at 3 AM. 
+                                    Realized I could build an entire gallery around the aesthetic. Spent two weeks 
+                                    hand-tuning the film response curves to match Kodak Portra 400. Yes, I'm that person.
+                                </p>
+                                <p class="story-outcome">
+                                    <strong>Result:</strong> 60fps on iPhone 12. 14KB total bundle. 
+                                    Looks like you're viewing 35mm scans through a loupe. 
+                                    No JavaScript framework could do this. Sometimes the right tool 
+                                    is no tool at all.
+                                </p>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-year">2026 — Live</span>
+                                <span class="project-links">
+                                    <a href="#" class="link-ghost">View Live →</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: Rubric Generator -->
+                    <article class="project-card" data-project="rubric" tabindex="0">
+                        <div class="project-visual">
+                            <div class="project-media-wrap">
+                                <img src="assets/rubric-generator.webp" alt="Rubric Generator interface" loading="lazy">
+                                <div class="project-glow cyan"></div>
+                            </div>
+                            <div class="project-meta-overlay">
+                                <span class="project-number">03</span>
+                                <div class="project-quick-stats">
+                                    <span>8 min</span>
+                                    <span>•</span>
+                                    <span>Python</span>
+                                    <span>•</span>
+                                    <span>LLM-powered</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <h3>Rubric Generator</h3>
+                                <div class="project-tags">
+                                    <span>Python</span>
+                                    <span>FastAPI</span>
+                                    <span>LLM</span>
+                                    <span>Quality Loop</span>
+                                </div>
+                            </div>
+                            <div class="project-story">
+                                <p class="story-lead">
+                                    <strong>The problem:</strong> Writing evaluation rubrics for AI training data 
+                                    takes 45 minutes per task. It's repetitive, it's boring, and humans are terrible 
+                                    at being consistent evaluators.
+                                </p>
+                                <p>
+                                    <strong>My approach:</strong> Built a system that generates rubrics from examples. 
+                                    Give it 5 good/bad pairs, it extracts the criteria, builds a rubric, 
+                                    then validates itself by scoring the examples. If it disagrees with human labels, 
+                                    it iterates. Meta-evaluation loop. Takes ~8 minutes end-to-end.
+                                </p>
+                                <p>
+                                    <strong>Built during:</strong> A particularly tedious annotation sprint. 
+                                    I was writing my 12th rubric of the day and thought "I could automate this, 
+                                    or I could keep suffering." Chose the first option. Three days later, 
+                                    the tool was generating better rubrics than I was.
+                                </p>
+                                <p class="story-outcome">
+                                    <strong>Now using it</strong> for all annotation work. It doesn't replace judgment—
+                                    it operationalizes it. When the LLM disagrees with me, I learn something 
+                                    about my own biases. Sometimes the machine is right. That's... humbling.
+                                </p>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-year">2025 — Internal Tool</span>
+                                <span class="project-links">
+                                    <a href="#" class="link-ghost">Read How →</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 4: OpenClaw Node -->
+                    <article class="project-card" data-project="node" tabindex="0">
+                        <div class="project-visual">
+                            <div class="project-media-wrap">
+                                <img src="assets/openclaw-node.webp" alt="OpenClaw Node distributed system" loading="lazy">
+                                <div class="project-glow"></div>
+                            </div>
+                            <div class="project-meta-overlay">
+                                <span class="project-number">04</span>
+                                <div class="project-quick-stats">
+                                    <span>P2P</span>
+                                    <span>•</span>
+                                    <span>CRDT</span>
+                                    <span>•</span>
+                                    <span>Offline-first</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <h3>OpenClaw Node</h3>
+                                <div class="project-tags">
+                                    <span>WebRTC</span>
+                                    <span>SQLite</span>
+                                    <span>CRDT</span>
+                                    <span>Distributed</span>
+                                </div>
+                            </div>
+                            <div class="project-story">
+                                <p class="story-lead">
+                                    <strong>The problem:</strong> Annotation work happens on trains, 
+                                    planes, and places with spotty wifi. Central servers mean work stops 
+                                    when the connection drops. Unacceptable.
+                                </p>
+                                <p>
+                                    <strong>My approach:</strong> Built a P2P sync layer using CRDTs. 
+                                    Each node is a full SQLite database that syncs peer-to-peer via WebRTC. 
+                                    Conflict resolution handled automatically. Go offline for 3 days, 
+                                    come back online, and everything merges cleanly. No central server required, 
+                                    though you can run one if you want.
+                                </p>
+                                <p>
+                                    <strong>Iteration 1</strong> used Operational Transforms. It was a nightmare. 
+                                    Switched to CRDTs after reading Martin Kleppmann's papers at 1 AM. 
+                                    Rewrote the whole sync layer in a weekend. Best decision I made on that project.
+                                </p>
+                                <p class="story-outcome">
+                                    <strong>Currently:</strong> 47 nodes in production. Longest offline stretch: 
+                                    11 days in rural Montana. Synced 14,000 annotations on reconnect with zero conflicts. 
+                                    The system works because I designed it for my actual life, not an idealized one.
+                                </p>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-year">2024 — Active</span>
+                                <span class="project-links">
+                                    <a href="#" class="link-ghost">Architecture →</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 5: Terminal UI -->
+                    <article class="project-card" data-project="terminal" tabindex="0">
+                        <div class="project-visual">
+                            <div class="project-media-wrap">
+                                <img src="assets/terminal-ui.webp" alt="Terminal UI System rendering performance" loading="lazy">
+                                <div class="project-glow amber"></div>
+                            </div>
+                            <div class="project-meta-overlay">
+                                <span class="project-number">05</span>
+                                <div class="project-quick-stats">
+                                    <span>500k lines</span>
+                                    <span>•</span>
+                                    <span>WebGL</span>
+                                    <span>•</span>
+                                    <span>WASM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <h3>Terminal UI System</h3>
+                                <div class="project-tags">
+                                    <span>WebGL</span>
+                                    <span>Rust → WASM</span>
+                                    <span>0 DOM nodes</span>
+                                </div>
+                            </div>
+                            <div class="project-story">
+                                <p class="story-lead">
+                                    <strong>The problem:</strong> Browser terminals die at ~10,000 lines. 
+                                    DOM nodes multiply, GC kicks in, everything stutters. I needed to render 
+                                    500,000 lines of logs at 60fps. xterm.js couldn't do it. Neither could any 
+                                    terminal I tested.
+                                </p>
+                                <p>
+                                    <strong>My approach:</strong> Abandoned the DOM entirely. 
+                                    WebGL renderer, glyph atlas, text shaped in Rust and compiled to WASM. 
+                                    The entire terminal is one canvas element. Scrolling is just changing a uniform. 
+                                    Viewport culling happens on the GPU. Result: constant-time rendering regardless of buffer size.
+                                </p>
+                                <p>
+                                    <strong>Built in:</strong> Two furious weeks after watching a data pipeline 
+                                    dump 200k lines and bringing the browser to its knees. The Rust/WASM bridge 
+                                    fought me for three days. Almost gave up. Didn't. Worth it.
+                                </p>
+                                <p class="story-outcome">
+                                    <strong>Now handling</strong> 500,000+ lines at locked 60fps on integrated graphics. 
+                                    Memory usage: flat. No DOM thrashing. The cursor blinks at exactly 530ms intervals, 
+                                    matching real VT100 behavior. Because details matter when you live in a terminal.
+                                </p>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-year">2024 — Open Source</span>
+                                <span class="project-links">
+                                    <a href="#" class="link-ghost">GitHub →</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 6: Memory Graph -->
+                    <article class="project-card" data-project="memory" tabindex="0">
+                        <div class="project-visual">
+                            <div class="project-media-wrap">
+                                <img src="assets/memory-graph.webp" alt="Memory Graph knowledge visualization" loading="lazy">
+                                <div class="project-glow cyan"></div>
+                            </div>
+                            <div class="project-meta-overlay">
+                                <span class="project-number">06</span>
+                                <div class="project-quick-stats">
+                                    <span>10k nodes</span>
+                                    <span>•</span>
+                                    <span>WASM physics</span>
+                                    <span>•</span>
+                                    <span>Real-time</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <h3>Memory Graph</h3>
+                                <div class="project-tags">
+                                    <span>D3</span>
+                                    <span>WASM</span>
+                                    <span>Force-directed</span>
+                                    <span>10k+ nodes</span>
+                                </div>
+                            </div>
+                            <div class="project-story">
+                                <p class="story-lead">
+                                    <strong>The problem:</strong> My notes are a graph, but all the tools show them 
+                                    as lists. I wanted to see the connections—the way ideas cluster, 
+                                    the paths between concepts, the shape of my own thinking.
+                                </p>
+                                <p>
+                                    <strong>My approach:</strong> Force-directed graph in WASM. 
+                                    Physics simulation runs at 120fps regardless of node count. 
+                                    Implemented Barnes-Hut optimization so it's O(n log n) instead of O(n²). 
+                                    Can handle 10,000 nodes smoothly. The layout algorithm is based on 
+                                    how I actually think: related ideas attract, unrelated ones repel.
+                                </p>
+                                <p>
+                                    <strong>Built:</strong> Over a month of evenings. Started as a way to visualize 
+                                    my annotation knowledge graph. Realized it was more useful as a thinking tool. 
+                                    Now I use it to find connections I wouldn't have seen otherwise. Graph as mirror.
+                                </p>
+                                <p class="story-outcome">
+                                    <strong>Currently:</strong> 2,847 nodes, 8,192 edges. 
+                                    Longest path: 17 hops from "calculus" to "film grain shaders" 
+                                    (through linear algebra, optimization, and a detour into color theory). 
+                                    The graph knows me better than I know myself.
+                                </p>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-year">2023 — Personal</span>
+                                <span class="project-links">
+                                    <a href="#" class="link-ghost">Explore →</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- MANIFESTO -->
+        <section id="manifesto" class="manifesto">
+            <div class="container narrow">
+                <div class="manifesto-header">
+                    <div class="section-eyebrow">MANIFESTO</div>
+                    <h2>Interface Architect</h2>
+                    <p class="manifesto-subtitle">Building systems that tell the truth</p>
+                </div>
+
+                <div class="manifesto-content">
+                    <div class="manifesto-section">
+                        <h3>On zero-bloat systems</h3>
+                        <p>
+                            Every dependency is a liability. Every framework is a bet that someone else's 
+                            abstractions match your problem. They rarely do. I build with vanilla JS, 
+                            WebGL, and standards that will outlive any npm package. If I can't explain 
+                            what every line does, it doesn't ship. This is non-negotiable.
+                        </p>
+                        <p>
+                            <strong>OpenClaw philosophy:</strong> Truthful systems. No hidden state, 
+                            no magic, no "it works, don't touch it." If you can't trace a bug to its source 
+                            in under 5 minutes, the architecture has failed you.
+                        </p>
+                    </div>
+
+                    <div class="manifesto-section">
+                        <h3>On the 16.67ms rule</h3>
+                        <p>
+                            60fps means you have 16.67 milliseconds per frame. Not 17. Not "approximately 16." 
+                            Sixteen point six seven. I count microseconds because users feel the difference 
+                            between 58fps and 60fps even if they can't articulate it. Micro-interactions 
+                            aren't polish—they're the product.
+                        </p>
+                        <p>
+                            Smooth scrolling, instant feedback, animations that respect physics. 
+                            These aren't nice-to-haves. They're the difference between software that 
+                            feels alive and software that feels dead.
+                        </p>
+                    </div>
+
+                    <div class="manifesto-section">
+                        <h3>On systems thinking</h3>
+                        <p>
+                            Interfaces aren't screens. They're systems with state, feedback loops, 
+                            and emergent behavior. I design for the system, not the mockup. 
+                            What happens on the 1000th interaction? What breaks when the network is slow? 
+                            How does it feel at 2 AM when you're tired and making mistakes?
+                        </p>
+                        <p>
+                            Every project starts with constraints: performance budget, accessibility requirements, 
+                            worst-case scenarios. Creativity thrives under constraints. Without them, 
+                            you get bloat and wishful thinking.
+                        </p>
+                    </div>
+
+                    <div class="manifesto-section">
+                        <h3>What I refuse to build</h3>
+                        <ul class="refusal-list">
+                            <li><strong>Dark patterns.</strong> No tricking users into subscriptions. No hiding the unsubscribe button. No "are you sure you want to leave?" guilt trips.</li>
+                            <li><strong>Bloat as a service.</strong> If your marketing site needs 3MB of JavaScript, you have failed at web development.</li>
+                            <li><strong>Inaccessible by design.</strong> If it doesn't work with a keyboard, with a screen reader, with reduced motion—it's not done.</li>
+                            <li><strong>AI slop.</strong> Generative fill is not a design system. I'm not building interfaces that look like everyone else's because we all used the same model.</li>
+                        </ul>
+                    </div>
+
+                    <div class="manifesto-section">
+                        <h3>My methodology</h3>
+                        <ol class="method-list">
+                            <li><strong>Understand the actual problem.</strong> Not the JIRA ticket. The real friction.</li>
+                            <li><strong>Build the simplest thing that could work.</strong> Usually vanilla JS and a canvas.</li>
+                            <li><strong>Measure everything.</strong> FPS, memory, time-to-interactive, annotation throughput.</li>
+                            <li><strong>Optimize the hot path.</strong> 80% of time is spent in 20% of code. Find it. Fix it.</li>
+                            <li><strong>Ship it.</strong> Perfect is the enemy of 60fps.</li>
+                            <li><strong>Watch people use it.</strong> The interface you designed is not the interface they experience.</li>
+                        </ol>
+                    </div>
+
+                    <div class="manifesto-closing">
+                        <p>
+                            I'm not interested in building the next unicorn. I'm interested in building 
+                            tools that respect your time, your attention, and your intelligence. 
+                            Software that gets out of the way. Interfaces that feel inevitable, 
+                            like they couldn't have been designed any other way.
+                        </p>
+                        <p class="manifesto-signature">
+                            — Georgie<br>
+                            <span class="signature-meta">Built at 2 AM, probably. Shipped anyway.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-intro">
+                        <h2>Let's build something truthful</h2>
+                        <p>
+                            Currently booking Q3 2026. I take on 2-3 projects at a time, 
+                            max. Prefer long-form work where I can go deep. 
+                            Remote-first, async-friendly, and I keep weird hours.
+                        </p>
+                        <div class="contact-availability">
+                            <div class="availability-dot"></div>
+                            <span>Available for select projects</span>
+                        </div>
+                    </div>
+                    <div class="contact-methods">
+                        <a href="mailto:hello@movingbytes.dev" class="contact-method magnetic" data-magnetic>
+                            <div class="method-icon">→</div>
+                            <div class="method-details">
+                                <div class="method-label">Email</div>
+                                <div class="method-value">hello@movingbytes.dev</div>
+                            </div>
+                        </a>
+                        <a href="https://github.com/jayjz" target="_blank" rel="noopener" class="contact-method magnetic" data-magnetic>
+                            <div class="method-icon">↗</div>
+                            <div class="method-details">
+                                <div class="method-label">GitHub</div>
+                                <div class="method-value">@jayjz</div>
+                            </div>
+                        </a>
+                        <div class="contact-method">
+                            <div class="method-icon">•</div>
+                            <div class="method-details">
+                                <div class="method-label">Response time</div>
+                                <div class="method-value">Usually within 24 hours</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-brand">movingbytes.dev</div>
+                    <div class="footer-meta">© 2026 Georgie Rocky • Built with 0 frameworks</div>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-stats">
+                        <span id="fps-counter">-- fps</span>
+                        <span>•</span>
+                        <span id="load-time">-- ms</span>
+                        <span>•</span>
+                        <span>100 Lighthouse</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+</body>
+</html>
