@@ -4,25 +4,41 @@
  */
 
 :root {
-    --bg: #0a0a0a;
-    --bg-elev: #111;
-    --text: #e8e8e8;
-    --text-muted: #999;
-    --text-dim: #666;
-    --cyan: #00d9ff;
-    --amber: #ff9000;
+    --bg: #050505;
+    --bg-elev: #0a0a0c;
+    --bg-elev-2: #121218;
+    --text: #e8e8ec;
+    --text-muted: #9a9aa3;
+    --text-dim: #6b6b75;
+    --perf-acid: #7cff67;
+    --perf-mint: #00ffa3;
+    --perf-cyan: #00d9ff;
+    --perf-teal: #5affb1;
+    --perf-deep: #00a896;
+    --truth-burnt: #ff6b35;
+    --truth-amber: #ff9000;
+    --truth-copper: #d97706;
+    --truth-glow: #f59e0b;
+    --truth-rust: #b45309;
+    --cyan: var(--perf-cyan);
+    --amber: var(--truth-amber);
     --red: #ff3366;
-    --border: #1a1a1a;
-    --border-light: #2a2a2a;
-    --accent: var(--cyan);
-    
+    --accent: var(--perf-cyan);
+    --accent-alt: var(--perf-acid);
+    --border: #1c1c24;
+    --border-light: #2a2a30;
+    --border-glow: rgba(0, 217, 255, 0.15);
+    --grain-opacity: 0.045;
+    --scan-opacity: 0.035;
+    --vignette-start: 40%;
+    --metric-2400: var(--perf-acid);
+    --metric-60fps: var(--perf-mint);
+    --metric-zero: var(--text-dim);
     --font-mono: 'JetBrains Mono', ui-monospace, monospace;
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-    
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
     --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    
     --container: 1200px;
     --container-narrow: 720px;
 }
